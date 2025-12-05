@@ -1,116 +1,116 @@
 # **Exercise 1 — Introduction to DNA Melting Curves**
 
 ## **Overview**
-DNA melting curves describe how double-stranded DNA (dsDNA) separates into single strands as temperature increases.  
-This exercise teaches students how melting curves are generated, how to interpret them, and how sequence composition affects melting behavior.
+
+DNA melting curves describe how double-stranded DNA (dsDNA) separates into single strands as temperature increases. In this exercise, students learn both the biochemistry behind DNA melting and how melting behavior is simulated using thermodynamic models.
 
 ---
 
 ## **Purpose**
-This exercise helps students:
 
-- Understand how melting curves are generated from thermodynamic models.  
-- Identify key features of a melting curve (baseline, transition region, Tm).  
-- Interpret how sequence composition (GC/AT content) affects melting behavior.  
-- Apply melting-curve analysis to distinguish between different DNA amplicons.
+This exercise helps students:
+Understand the biochemical basis of DNA melting and how melting curves are measured experimentally.
+Understand how melting curves are simulated using the nearest-neighbor thermodynamic model.
+Identify key melting-curve features (baseline, transition region, Tm).
+Compare melting behaviors of short vs long DNA and AT-rich vs GC-rich sequences.
+Interpret melting curves and derivative curves to distinguish among different DNA amplicons.
 
 ---
 
 ## **Exercise Scenario**
-You are assisting a new member in a PCR workflow lab. They are confused about how to read melting curves from the simulator and from real experiments.  
-Your task is to analyze several reference melting curves and explain their key features.
+
+You are assisting a new member in a virology lab who is learning to interpret melting curves from both real experiments and the simulator. Your task is to analyze several reference melting curves and explain their features.
 
 ---
 
 # **Background Concepts**
 
-## **What a DNA Melting Curve Represents**
-A DNA melting curve shows how a population of dsDNA molecules gradually separates into single-stranded DNA as temperature increases.  
-The simulator measures **Fraction Melted**, which ranges from:
-
-- **0.0** → completely double-stranded  
-- **1.0** → completely single-stranded  
-
-Plotting Fraction Melted vs Temperature produces the characteristic **S-shaped (sigmoidal)** curve.
-
----
-
-## **How a Melting Curve Is Generated**
-Melting occurs in three stages:
-
-### **1. Low Temperature — Baseline**
-- DNA is fully double-stranded  
-- Fraction Melted ≈ 0.0  
-- Curve is flat  
-
-### **2. Transition Region — Cooperative Melting**
-- Local regions begin to denature  
-- Once one section melts, neighboring regions destabilize  
-- This cooperative effect creates the steep slope  
-
-### **3. High Temperature — Plateau**
-- All DNA is single-stranded  
-- Fraction Melted ≈ 1.0  
-- Curve becomes flat again  
-
-Most melting simulators use the **Nearest-Neighbor Thermodynamic Model** (SantaLucia model) to compute base-pair stability.
+**1. What a DNA Melting Curve Represents**
+   
+A DNA melting curve shows how a population of dsDNA gradually becomes single-stranded as temperature increases.
+The simulator reports Fraction Melted:
+0.0 → fully double-stranded
+1.0 → fully single-stranded
+Plotting Fraction Melted vs Temperature produces the melting curve.
 
 ---
 
-## **Melting Temperature (Tm)**
-The **Tm** is:
+**2. Biochemistry vs Simulation**
 
-> The temperature at which **50%** of the DNA molecules are melted.  
+**Biochemistry of Melting**
+DNA melts gradually as hydrogen bonds and base-stacking interactions weaken.
+Heating destabilizes local regions, which then promotes melting in neighboring segments (cooperative melting).
+Experimental melting curves are measured using fluorescence dyes or absorbance changes.
 
-It indicates how stable the DNA duplex is.  
-Higher Tm → more stable (GC-rich).  
-Lower Tm → less stable (AT-rich).
+**Simulation of Melting**
+The simulator uses the nearest-neighbor thermodynamic model (SantaLucia model).
+Each adjacent base pair contributes enthalpy and entropy values.
+The model assumes perfectly complementary strands.
+Mismatches are NOT modeled in this version of the software.
+Salt concentration, sequence context, and length influence stability.
 
+**3. How a Melting Curve Is Organized**
+
+DNA melting typically shows three regions:
+
+1. Low-Temperature Baseline   
+DNA fully duplexed
+Fraction Melted ≈ 0
+Curve is flat
+
+2. Cooperative Transition Region
+Local domains begin to melt.
+Cooperativity causes a steep rise in the curve.
+
+3. High-Temperature Plateau
+DNA fully melted
+Fraction Melted ≈ 1
+Curve becomes flat again
 ---
 
-## **Why AT-rich and GC-rich DNA Melt Differently**
-- **GC pairs have 3 hydrogen bonds**  
-- **AT pairs have 2 hydrogen bonds**  
-- GC bases also have stronger base-stacking  
-
-Therefore:
-- GC-rich sequences → **higher Tm**  
-- AT-rich sequences → **lower Tm**
-
+**4. Melting Temperature (Tm)**
+The Tm is the temperature at which 50% of molecules are melted.
+Higher Tm → more stable DNA (GC-rich)
+Lower Tm → less stable DNA (AT-rich)
 ---
+**5. AT-Rich vs GC-Rich DNA**
 
-**Why AT-rich and GC-rich DNA Melt Differently**
-GC pairs: 3 hydrogen bonds + stronger stacking
-AT pairs: 2 hydrogen bonds
+GC pairs:
+3 hydrogen bonds
+Stronger stacking interactions
+AT pairs:
+2 hydrogen bonds
 Therefore:
 GC-rich sequences → higher Tm
 AT-rich sequences → lower Tm
-Students will observe this directly in Task 4.
+Students will compare GC/AT-rich curves in Task 4.
 
 ---
 
-**Short (<100 bp) vs Long DNA Melting Behavior**
+**6. Short (<100 bp) vs Long (>200 bp) DNA Melting Behavior**
 
-**Short DNA (<100 bp)**
-Typically melts all at once
-Produces a simple, sigmoidal melting curve
-Has a single peak in the first-derivative curve
-Tm is well-defined and reliable
-**Example (Simulated)**
-Sequence A (86 bp): smooth S-curve, one transition
-Derivative: one sharp peak
+Short DNA
+Usually melts in a single cooperative step.
+Melting curve is a simple sigmoidal curve.
+Derivative curve (–dF/dT) shows one sharp peak.
+Include a simple curve plot here.
+Longer DNA
+Contains regions with different GC content.
+AT-rich domains melt earlier; GC-rich domains melt later.
+Produces multiple melting transitions (multi-phase curves).
+Include a multi-phase curve plot here.
+The first derivative curve will show two or more peaks, each indicating a melt domain.
 
 ---
+**7. First-Derivative Melting Curves (–dF/dT)**
 
-**Longer DNA (>200 bp)**
-Contains regions with different GC content
-Low-GC domains melt earlier
-High-GC domains melt later
-Produces multi-phase melting curves
-First-derivative curve shows multiple peaks
-**Example (Simulated)**
-Sequence B (240 bp): shoulder + second slope
-Derivative: two distinct peaks indicating two melt domains
+Derivative curves show how rapidly DNA is melting at each temperature.
+Short DNA → one peak
+Long DNA → multiple peaks (multiple melting domains)
+Derivative curves make it easier to:
+Identify Tm
+Visualize domain structure
+Distinguish subtly different sequences
 
 ---
 
@@ -121,6 +121,21 @@ Derivative: two distinct peaks indicating two melt domains
 This plot illustrates the typical S-shaped melting profile generated by a thermodynamic model.
 
 ---
+**8. Factors That Influence Melting Behavior**
+
+Besides sequence composition:
+**Salt concentration**
+Higher Na⁺ or Mg²⁺ stabilizes dsDNA → Tm increases
+**Buffer additives**
+DMSO, formamide destabilize dsDNA → Tm decreases
+**Sequence complexity**
+Repeats or homopolymer regions melt more uniformly
+(correction from Bob)
+**Mismatches**
+Biochemically, mismatches lower duplex stability.
+Our simulator does NOT model mismatches, and assumes each DNA molecule is perfectly complementary.
+(as Bob instructed)
+
 
 **Why Longer Sequences Have Multiple Melting Domains**
 GC-rich regions are more stable
@@ -137,26 +152,6 @@ Students will visualize this using derivative curves
 **Reality:**
 Short DNA usually has one melting transition.
 Longer DNA may have multiple melting domains and therefore multiple melting peaks.
-
----
-
-**First-Derivative Melting Curves (–dF/dT)**
-The derivative curve plots how rapidly DNA is melting at each temperature.
-**Short DNA:** one sharp peak (one melting domain)
-**Long DNA:** two or more peaks (multiple melting domains)
-Derivative curves make it easier to visually identify Tm and melting transitions.
-
----
-
-**Additional Factors That Influence Melting Curves**
-
-Besides GC content and sequence length, several conditions can shift melting behavior:
-
-Salt concentration: Higher Na⁺ or Mg²⁺ stabilizes dsDNA, increasing Tm.
-Buffer components: Additives like DMSO or formamide lower Tm by weakening base pairing.
-Sequence complexity: Repeats or homopolymer regions melt less uniformly.
-Mismatches: Even a single mismatch can reduce Tm and change curve shape.
-These factors help explain why melting curves in real experiments may differ slightly from ideal simulated curves.
 
 ---
 
